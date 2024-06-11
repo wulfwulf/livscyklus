@@ -1,10 +1,10 @@
 .App {
   text-align: center;
 }
-
-body {
+html{
   background-color: #28382c; /* Udskift med den ønskede baggrundsfarve */
 }
+
 .CalendarBox {
  color:#28382c;
  background-color: white; 
@@ -23,4 +23,3 @@ body {
   justify-content: center;
   font-size: calc(10px + 2vmin);
 }
-
