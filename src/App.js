@@ -7,9 +7,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Velkommen til Livscyklus</h1>
+        <h1>Velkommen til Livs-cyklus</h1>
         <p>
-          Dette er en personlig app til Liv for at følge hendes cyklus.
+          Dette er en app til at følge sin cyklus.
         </p>
       </header>
       <div className='CalendarBox'>
