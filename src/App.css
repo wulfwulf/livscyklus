@@ -1,6 +1,7 @@
 .App {
   text-align: center;
 }
+
 html{
   background-color: #28382c; /* Udskift med den ønskede baggrundsfarve */
 }
@@ -9,10 +10,12 @@ html{
  color:#28382c;
  background-color: white; 
  display: flex;
- justify-content: center; /* Centrerer indholdet vandret */
- align-items: center; /* Centrerer indholdet lodret */
- width: 100%; /* Juster bredden efter behov */
+ flex-direction: column;
+ justify-content: center; 
+ align-items: center;  
+ width: 100%;  
 }
+
 
 .App-header {
   color: rgb(255, 255, 255);
