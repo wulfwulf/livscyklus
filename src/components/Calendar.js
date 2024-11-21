@@ -28,11 +28,24 @@ const Calendar = ({selectHandler, dateArray, selecteddatedata}) => {
         setHighlightedDays(dateArray)
     }, [dateArray])
 
-    
     return(
         <DateCalendar
             orientation="portrait"
             onChange={selectHandler}
+            sx={{
+                "& .Mui-selected": {
+                backgroundColor: "#F95D44",
+                color: "white",
+                },
+                "& .Mui-selected:hover": {
+                backgroundColor: "#F95D44",
+                color: "white",
+                },
+                "& .Mui-selected:focus": {
+                backgroundColor: "#F95D44",
+                color: "white",
+                },
+               }}
             slots={{
                 day : CustomDay
             }}

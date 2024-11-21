@@ -1,4 +1,5 @@
 {
+  "homepage": "http://wulfwulf",
   "name": "livscyklus",
   "version": "0.1.0",
   "private": true,
@@ -13,6 +14,7 @@
     "@testing-library/user-event": "^13.5.0",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.11",
+    "firebase": "^10.13.2",
     "moment": "^2.30.1",
     "react": "^18.3.1",
     "react-big-calendar": "^1.12.2",
@@ -43,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^6.2.0"
   }
 }
