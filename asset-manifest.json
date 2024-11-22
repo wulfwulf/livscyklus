@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/livscyklus/static/css/main.cade7c93.css",
-    "main.js": "/livscyklus/static/js/main.fef5b437.js",
+    "main.js": "/livscyklus/static/js/main.c043a024.js",
     "index.html": "/livscyklus/index.html",
     "main.cade7c93.css.map": "/livscyklus/static/css/main.cade7c93.css.map",
-    "main.fef5b437.js.map": "/livscyklus/static/js/main.fef5b437.js.map"
+    "main.c043a024.js.map": "/livscyklus/static/js/main.c043a024.js.map"
   },
   "entrypoints": [
     "static/css/main.cade7c93.css",
-    "static/js/main.fef5b437.js"
+    "static/js/main.c043a024.js"
   ]
 }
