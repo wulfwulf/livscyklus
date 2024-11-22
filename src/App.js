@@ -299,15 +299,15 @@ function App() {
               color="inherit"
               onClick={cancelHandler}
               aria-label="close"
-              sx={{color: formColor === "#FFFFFF" ? "white" : "#666666",}}
+              sx={{color: formColor === "#FFFFFF" ? "white" : "#212121",}}
               
             >
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1, color: formColor === "#FFFFFF" ? "white" : "#666666",}} variant="h6" component="div">
+            <Typography sx={{ ml: 2, flex: 1, color: formColor === "#FFFFFF" ? "white" : "#212121",}} variant="h6" component="div">
               {selectedDateData.TimeStamp.format("DD/MM/YYYY")}
             </Typography>
-            <Button sx={{color: formColor === "#FFFFFF" ? "white" : "#666666",}} autoFocus color="inherit" onClick={closeHandler}>
+            <Button sx={{color: formColor === "#FFFFFF" ? "white" : "#212121",}} autoFocus color="inherit" onClick={closeHandler}>
               Gem
             </Button>
           </Toolbar>
