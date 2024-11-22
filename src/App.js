@@ -33,18 +33,17 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-
-
-
-
 function App() {
   const [dialogOpen, setDialogOpen] = React.useState(false)
-  const [selectedDateData, setSelectedDateData] = React.useState({TimeStamp : dayjs(), color : "#FF0000", note1 : "", note2 : "", note3 : ""})
+  const [selectedDateData, setSelectedDateData] = React.useState({TimeStamp : dayjs(), color : "#FF0000", note1 : "", note2 : "", note3 : "", note4:"", note5:"", note6:""})
   const [selectedDate, setSelectedDate] = React.useState(dayjs())
   const [selectedIndex, setSelectedIndex] = React.useState(-1)
-  const [formNote1, setFormNote1] = React.useState("");
-  const [formNote2, setFormNote2] = React.useState("");
-  const [formNote3, setFormNote3] = React.useState("");
+  const [formNote1, setFormNote1] = React.useState(""); // Søvn og Søvnkvalitet
+  const [formNote2, setFormNote2] = React.useState(""); // Sult
+  const [formNote3, setFormNote3] = React.useState(""); // Generelt Humør
+  const [formNote4, setFormNote4] = React.useState(""); // Energiniveau
+  const [formNote5, setFormNote5] = React.useState(""); // Aktivitet
+  const [formNote6, setFormNote6] = React.useState(""); // Lyst
   const [formColor, setFormColor] = React.useState("#FFFFFF");
   const [dateArray, setDateArray] = React.useState([])
 
@@ -70,22 +69,18 @@ function App() {
       console.log(error)
     }
   }
-  const updateCalendarData = async() =>{
-    try {
-
-    } catch (error) {
-      console.log(error)
-    }
-  }
   const addCalendarData = async(data) =>{
     try {
-      console.log("testo")
       await addDoc(calendarCollectionRef, {
         TimeStamp: dayjs(data.TimeStamp).toDate(),
         color: data.color,
         note1: data.note1,
         note2: data.note2,
         note3: data.note3,
+        note4: data.note4,
+        note5: data.note5,
+        note6: data.note6,
+
       });
       await getCalendarList();
     } catch (error) {
@@ -118,6 +113,9 @@ function App() {
           note1: data.note1,
           note2: data.note2,
           note3: data.note3,
+          note4: data.note4,
+          note5: data.note5,
+          note6: data.note6,
         });
         console.log("Existing entry updated!");
       } else {
@@ -151,7 +149,7 @@ function App() {
       setSelectedDateData({...temp})
     }
     else{
-      setSelectedDateData({TimeStamp : selectedDate, color : "#FFFFFF",note1 : "",note2 : "",note3 : ""})
+      setSelectedDateData({TimeStamp : selectedDate, color : "#FFFFFF",note1 : "",note2 : "",note3 : "", note4: "", note5:"", note6:""})
     }
   },[dateArray, formColor, selectedDate, selectedIndex]) 
 
@@ -175,6 +173,24 @@ function App() {
 
   useEffect(()=>{
     let tempDateData = selectedDateData
+    tempDateData.note4 = formNote4
+    setSelectedDateData(tempDateData)
+  },[formNote4]) 
+
+  useEffect(()=>{
+    let tempDateData = selectedDateData
+    tempDateData.note5 = formNote5
+    setSelectedDateData(tempDateData)
+  },[formNote5]) 
+
+  useEffect(()=>{
+    let tempDateData = selectedDateData
+    tempDateData.note6 = formNote6
+    setSelectedDateData(tempDateData)
+  },[formNote6]) 
+
+  useEffect(()=>{
+    let tempDateData = selectedDateData
     tempDateData.color = formColor
     setSelectedDateData(tempDateData)
   },[formColor]) 
@@ -192,7 +208,7 @@ function App() {
       setSelectedDateData({...temp})
     }
     else{
-      setSelectedDateData({TimeStamp : selectedDate, color : "#FFFFFF",note1 : "",note2 : "",note3 : ""})
+      setSelectedDateData({TimeStamp : selectedDate, color : "#FFFFFF",note1 : "",note2 : "",note3 : "", note4: "", note5:"", note6:""})
     }
 
     console.log("Dialog cancelled")
@@ -240,6 +256,18 @@ function App() {
     setFormNote3(e.target.value)
     console.log("Note3 changed")
   }
+  const note4ChangeHandler = (e) => {
+    setFormNote4(e.target.value)
+    console.log("Note4 changed")
+  }
+  const note5ChangeHandler = (e) => {
+    setFormNote5(e.target.value)
+    console.log("Note5 changed")
+  }
+  const note6ChangeHandler = (e) => {
+    setFormNote6(e.target.value)
+    console.log("Note6 changed")
+  }
   
   
   return (
@@ -271,14 +299,15 @@ function App() {
               color="inherit"
               onClick={cancelHandler}
               aria-label="close"
+              sx={{color: formColor === "#FFFFFF" ? "white" : "#666666",}}
               
             >
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+            <Typography sx={{ ml: 2, flex: 1, color: formColor === "#FFFFFF" ? "white" : "#666666",}} variant="h6" component="div">
               {selectedDateData.TimeStamp.format("DD/MM/YYYY")}
             </Typography>
-            <Button autoFocus color="inherit" onClick={closeHandler}>
+            <Button sx={{color: formColor === "#FFFFFF" ? "white" : "#666666",}} autoFocus color="inherit" onClick={closeHandler}>
               Gem
             </Button>
           </Toolbar>
@@ -296,39 +325,60 @@ function App() {
         sx={{mx:3}}
         
       >
-        <FormControlLabel value="#6AA84F" control={<Radio />} label="Forår" />
-        <FormControlLabel value="#F1C232" control={<Radio />} label="Sommer" />
-        <FormControlLabel value="#FF6D01" control={<Radio />} label="Efterår" />
-        <FormControlLabel value="#3D85C6" control={<Radio />} label="Vinter" />
+        <FormControlLabel value="#B3E5A1" control={<Radio />} label="Forår" />
+        <FormControlLabel value="#FCFD95" control={<Radio />} label="Sommer" />
+        <FormControlLabel value="#F6C6AC" control={<Radio />} label="Efterår" />
+        <FormControlLabel value="#95DCF7" control={<Radio />} label="Vinter" />
         
       </RadioGroup>
       <TextField
-          id="outlined-textarea"
-          label="Søvnkvalitet"
-          sx={{mx:3, mt:2}}
-          //placeholder="Note"
-          multiline
-          defaultValue = {selectedDateData.note1}
-          onChange={note1ChangeHandler}
-        />
-         <TextField
-          id="outlined-textarea"
-          label="Sult"
-          sx={{mx:3, mt:2}}
-          //placeholder="Note"
-          multiline
-          defaultValue = {selectedDateData.note2}
-          onChange={note2ChangeHandler}
-        />
-         <TextField
-          id="outlined-textarea"
-          label="Generelt Humør"
-          sx={{mx:3, mt:2}}
-          //placeholder="Note"
-          multiline
-          defaultValue = {selectedDateData.note3}
-          onChange={note3ChangeHandler}
-        />
+        id="textarea-sleep-quality"
+        label="Søvn og søvnkvalitet"
+        sx={{ mx: 3, mt: 2 }}
+        multiline
+        defaultValue={selectedDateData.note1}
+        onChange={note1ChangeHandler}
+      />
+      <TextField
+        id="textarea-hunger"
+        label="Sult"
+        sx={{ mx: 3, mt: 2 }}
+        multiline
+        defaultValue={selectedDateData.note2}
+        onChange={note2ChangeHandler}
+      />
+      <TextField
+        id="textarea-mood"
+        label="Generelt Humør"
+        sx={{ mx: 3, mt: 2 }}
+        multiline
+        defaultValue={selectedDateData.note3}
+        onChange={note3ChangeHandler}
+      />
+      <TextField
+        id="textarea-energy-level"
+        label="Energiniveau"
+        sx={{ mx: 3, mt: 2 }}
+        multiline
+        defaultValue={selectedDateData.note4}
+        onChange={note4ChangeHandler}
+      />
+      <TextField
+        id="textarea-activity"
+        label="Aktivitet"
+        sx={{ mx: 3, mt: 2 }}
+        multiline
+        defaultValue={selectedDateData.note5}
+        onChange={note5ChangeHandler}
+      />
+      <TextField
+        id="textarea-desire"
+        label="Lyst"
+        sx={{ mx: 3, mt: 2 }}
+        multiline
+        defaultValue={selectedDateData.note6}
+        onChange={note6ChangeHandler}
+      />
     </FormControl>
       </Dialog>
     </div>
