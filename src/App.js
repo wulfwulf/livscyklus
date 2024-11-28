@@ -35,7 +35,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function App() {
   const [dialogOpen, setDialogOpen] = React.useState(false)
-  const [selectedDateData, setSelectedDateData] = React.useState({TimeStamp : dayjs(), color : "#FF0000", note1 : "", note2 : "", note3 : "", note4:"", note5:"", note6:""})
+  const [selectedDateData, setSelectedDateData] = React.useState({TimeStamp : dayjs(), color : "#FF0000", note1 : "", note2 : "", note3 : "", note4:"", note5:"", note6:"", note7:""})
   const [selectedDate, setSelectedDate] = React.useState(dayjs())
   const [selectedIndex, setSelectedIndex] = React.useState(-1)
   const [formNote1, setFormNote1] = React.useState(""); // Søvn og Søvnkvalitet
@@ -44,6 +44,7 @@ function App() {
   const [formNote4, setFormNote4] = React.useState(""); // Energiniveau
   const [formNote5, setFormNote5] = React.useState(""); // Aktivitet
   const [formNote6, setFormNote6] = React.useState(""); // Lyst
+  const [formNote7, setFormNote7] = React.useState(""); // Diverse
   const [formColor, setFormColor] = React.useState("#FFFFFF");
   const [dateArray, setDateArray] = React.useState([])
 
@@ -80,6 +81,7 @@ function App() {
         note4: data.note4,
         note5: data.note5,
         note6: data.note6,
+        note7: data.note7,
 
       });
       await getCalendarList();
@@ -116,6 +118,7 @@ function App() {
           note4: data.note4,
           note5: data.note5,
           note6: data.note6,
+          note7:data.note7,
         });
         console.log("Existing entry updated!");
       } else {
@@ -149,7 +152,7 @@ function App() {
       setSelectedDateData({...temp})
     }
     else{
-      setSelectedDateData({TimeStamp : selectedDate, color : "#FFFFFF",note1 : "",note2 : "",note3 : "", note4: "", note5:"", note6:""})
+      setSelectedDateData({TimeStamp : selectedDate, color : "#FFFFFF",note1 : "",note2 : "",note3 : "", note4: "", note5:"", note6:"", note7:""})
     }
   },[dateArray, formColor, selectedDate, selectedIndex]) 
 
@@ -191,6 +194,12 @@ function App() {
 
   useEffect(()=>{
     let tempDateData = selectedDateData
+    tempDateData.note7 = formNote7
+    setSelectedDateData(tempDateData)
+  },[formNote7]) 
+
+  useEffect(()=>{
+    let tempDateData = selectedDateData
     tempDateData.color = formColor
     setSelectedDateData(tempDateData)
   },[formColor]) 
@@ -208,7 +217,7 @@ function App() {
       setSelectedDateData({...temp})
     }
     else{
-      setSelectedDateData({TimeStamp : selectedDate, color : "#FFFFFF",note1 : "",note2 : "",note3 : "", note4: "", note5:"", note6:""})
+      setSelectedDateData({TimeStamp : selectedDate, color : "#FFFFFF",note1 : "",note2 : "",note3 : "", note4: "", note5:"", note6:"", note7:""})
     }
 
     console.log("Dialog cancelled")
@@ -227,7 +236,6 @@ function App() {
     }
     else{
         setDateArray([...dateArray,selectedDateData])
-        console.log("negativ værdi")
     }
     checkAndUpdateCalendarData(selectedDateData);
   }
@@ -268,7 +276,10 @@ function App() {
     setFormNote6(e.target.value)
     console.log("Note6 changed")
   }
-  
+  const note7ChangeHandler = (e) => {
+    setFormNote7(e.target.value)
+    console.log("Note7 changed")
+  }
   
   return (
     <div className="App">
@@ -378,6 +389,14 @@ function App() {
         multiline
         defaultValue={selectedDateData.note6}
         onChange={note6ChangeHandler}
+      />
+            <TextField
+        id="textarea-diverse"
+        label="Diverse"
+        sx={{ mx: 3, mt: 2 }}
+        multiline
+        defaultValue={selectedDateData.note7}
+        onChange={note7ChangeHandler}
       />
     </FormControl>
       </Dialog>
